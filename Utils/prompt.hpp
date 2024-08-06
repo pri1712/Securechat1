@@ -1,5 +1,7 @@
+//generates basic welcome messages etc.
 #include "../headers.hpp"
 using namespace std;
+
 
 string readme(string username) {
   string s = BLU;
