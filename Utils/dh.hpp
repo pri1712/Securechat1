@@ -6,7 +6,8 @@ const ll MOD = 1e9 + 7;
 const ll SMOD = 1e3 + 9;
 ll G, P;
 
-// For Server - Generator and Modulus
+// generates the generator g and modulus p.
+//used by the server.
 void generatePrimitiveKeys() {
     G = getRandomPrime(MOD);
     P = getRandomPrime(MOD);
@@ -18,17 +19,19 @@ void setPrimitiveKeys(ll g, ll p) {
     P = p;
 }
 
-// Client Private Key
+// Client Private Key-b.
 ll getPrivateKey() {
     return (getRandomPrime(SMOD));
 }
 
 // Client Public Key
+//creates g^x mod p.
 ll createPublicKey(ll x) {
     return modExp(G, x, P);
 }
 
 // Shared Secret - Diffie Hellman Key Exchange
+//creates A^b mod p.
 ll createSecretKey(ll A, ll y) {
     return modExp(A, y, P);
 }
