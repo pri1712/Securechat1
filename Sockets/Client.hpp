@@ -1,3 +1,4 @@
+//Could add retry logic for failed operations.
 #include "../headers.hpp"
 #include "../Utils/util.hpp"
 using namespace std;
@@ -8,12 +9,13 @@ class Client {
 
 public:
   //the constructor , takes the port and the address as input.
+//Using socket type IPv4 and a TCP connection, specified by the sock_stream and AF_inet respectively.
   Client(uint16_t port, string addr) {
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
       err("Unable to create socket.");
     }
-
+  // the sin_port must be in Network Byte Order, can be done using htons.
     memset(&saddr, 0, sizeof(sockaddr));
     saddr.sin_family = AF_INET;
     saddr.sin_port = htons(port);
@@ -28,7 +30,8 @@ public:
     }
     return sockfd;
   }
-
+//sends message till all the bytes are sent.
+//the message s is manipulated to be in a particular format, which is standardized for both server and clients.
   bool sendMessage(string s) {
     string sizeString = to_string(s.size());
     sizeString = string(MESSAGE_SIZE_LENGTH - sizeString.length(), '0') + sizeString;
