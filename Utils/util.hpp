@@ -5,6 +5,8 @@
 using namespace std;
 
 // Binary Exponetiation with Modulus
+//compute a^b mod m in logn time , as we are using the binary representation of b to speed up compputation.
+//refer : //cp-algorithms.com/algebra/binary-exp.html
 ll modExp(ll a, ll b, ll mod) {
     ll prod = 1;
     a %= mod;
