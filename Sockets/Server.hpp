@@ -5,7 +5,7 @@ class Server {
   struct sockaddr_in saddr;
 
 public:
-
+//constructor
   Server(uint16_t port) {
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
@@ -14,7 +14,7 @@ public:
     memset(&saddr, 0, sizeof(sockaddr));
     saddr.sin_family = AF_INET;
     saddr.sin_port = htons(port);
-    saddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    saddr.sin_addr.s_addr = htonl(INADDR_ANY);//allows connections from any IP address.
 
 // MAKE THE PORT AVAILABLE
     int reuse = 1;
@@ -26,12 +26,13 @@ public:
       perror("setsockopt(SO_REUSEPORT) failed");
     }
 #endif
-
+//done to listen in on connections on a particular port, it binds the socket to the specified port number.
     if ( bind(sockfd, (sockaddr *)&saddr, sizeof saddr) == -1) {
       err("Cannot Bind The Socket.");
     }
   }
 
+  //listen for incoming connections.
   void listenClients() {
     if (listen(sockfd, 10) == -1) {
       err("Cannot Listen.");
@@ -39,6 +40,7 @@ public:
     cout << "Waiting for Connections on port: " << PORT << endl;
   }
 
+//accepts new connections on the socket specified by saddr
   int acceptClients() {
     int new_fd;
     socklen_t a = sizeof(saddr);
@@ -48,6 +50,7 @@ public:
     return new_fd;
   }
 
+//sends the message s after copying it to the buffer.
   bool sendMessage(int fd, string s) {
     string sizeString = to_string(s.size());
     sizeString = string(MESSAGE_SIZE_LENGTH - sizeString.length(), '0') + sizeString;
@@ -64,7 +67,7 @@ public:
     }
     return true;
   }
-
+//since we are handling many clients we need a file descriptor to understand which socket we are reading and writing to, thus the fd is a necessary param.
   string receiveMessage(int fd) {
     char buf[MAX_SIZE] = {0};
     int byte_total = 0, byte_now = 0, len = MAX_SIZE;
