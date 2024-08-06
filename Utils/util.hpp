@@ -1,3 +1,5 @@
+//this file mainly involves extra computations that will be neeeded for generating the cryptographic keys.
+
 #ifndef UTILITIES
 #define UTILITIES
 
