@@ -1,12 +1,13 @@
 #include "../headers.hpp"
 #include "../Utils/util.hpp"
 using namespace std;
-
+//client class.
 class Client {
   int sockfd;
   struct sockaddr_in saddr;
 
 public:
+  //the constructor , takes the port and the address as input.
   Client(uint16_t port, string addr) {
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
