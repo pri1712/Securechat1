@@ -6,6 +6,7 @@ using namespace std;
 class Client {
   int sockfd;
   struct sockaddr_in saddr;
+//saddr contains the destination IP and port.
 
 public:
   //the constructor , takes the port and the address as input.
