@@ -4,9 +4,9 @@
 using namespace std;
 
 mutex mtx;
-queue<int> waitQueue;
-map<string, int> usernames;
-map<string, string> partner;
+queue<int> waitQueue; //Contains the list of waiting sockets.
+map<string, int> usernames; //contains the mapping between Username and socket address.
+map<string, string> partner; //mapping between the partners.
 
 Server server(PORT);
 
