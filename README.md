@@ -8,6 +8,5 @@ Multi-client Support: Handles multiple clients simultaneously using threads. But
 
 Account Management: Supports account creation, login, and logout functionalities.
 
-Message Encryption: Encrypts messages using a DH encryption method.
-
+Message Encryption: Encrypts messages using RC4 and a key that is derived using the DH key exchange algo
 Concurrency Control: Ensures thread-safe access to shared resources using mutexes.
